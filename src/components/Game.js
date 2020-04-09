@@ -28,6 +28,7 @@ export default class Game extends Component {
     }
 
     handleClick(i)  {
+        console.log(i);
         let steps = this.state.stepNumber;
         let history = this.state.history.slice(0,steps+1);
         let current = history[history.length - 1];

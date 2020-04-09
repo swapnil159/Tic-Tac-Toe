@@ -50,5 +50,5 @@ ul {
 
 /* difficulty */
 .difficulty {
-  transform: translate(100%,-50%);
+  margin-right: 20px;
 }
