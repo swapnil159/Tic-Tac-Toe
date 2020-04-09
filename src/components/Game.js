@@ -76,7 +76,7 @@ export default class Game extends Component {
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
         const moves = history.map((step, move) => {
-            const desc = move ? "Go to #" + move : "Start the game";
+            const desc = move ? "Go to #" + move : "Start new game";
             return (
                 <li key = {move}>
                     <button onClick={() => {this.jumpTo(move)}} >
@@ -87,15 +87,20 @@ export default class Game extends Component {
         });
 
         let status;
+        const step = this.state.stepNumber;
+
         if(winner) {
             status = 'Winner is ' + winner;
         }
-        else {
+        else if (step < 5) {
             status = 'Next Player is X';
+        }
+        else {
+            status = 'Game Drawn';
         }
 
         return (
-            <div>
+            <div className = "game">
                 <div className = "difficulty">
                     <label>
                         Choose the difficulty:
@@ -108,17 +113,15 @@ export default class Game extends Component {
                         </select>
                     </label>
                 </div>
-                <div className = "game">
-                    <div className = "game-board">
-                        <Board onClick={(i) => { this.handleClick(i);}}
-                                squares={current.squares}
-                        />
-                    </div>
+                <div className = "game-board">
+                    <Board onClick={(i) => { this.handleClick(i);}}
+                            squares={current.squares}
+                    />
+                </div>
 
-                    <div className = "game-info">
-                        <div>{status}</div>
-                        <ul>{moves}</ul>
-                    </div>
+                <div className = "game-info">
+                    <div>{status}</div>
+                    <ul>{moves}</ul>
                 </div>
             </div>
         )
@@ -168,6 +171,10 @@ function getPlace(squares, turn, difficulty) {
                 return b;
             if(squares[b] && squares[b] === squares[c] && !squares[a] && squares[b] === 'O')
                 return a;
+        }
+
+        for(let i = 0; i < lines.length; i++) {
+            const [a,b,c] = lines[i];
             if(squares[a] && squares[a] === squares[b] && !squares[c] && squares[a] === 'X')
                 return c;
             if(squares[a] && squares[a] === squares[c] && !squares[b] && squares[c] === 'X')
