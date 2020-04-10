@@ -28,7 +28,6 @@ export default class Game extends Component {
     }
 
     handleClick(i)  {
-        console.log(i);
         let steps = this.state.stepNumber;
         let history = this.state.history.slice(0,steps+1);
         let current = history[history.length - 1];
@@ -254,7 +253,7 @@ function getPlace(squares, turn, difficulty) {
 
     if (win.length === 0) {
         if (draw.length === 0)  {
-            if (turn === 3) {
+            if (turn === 3 || turn === 5 || turn === 7) {
                 return null;
             }
             for (let i = 0; i < 9; i++) {
