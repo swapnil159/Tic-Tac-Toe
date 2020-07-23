@@ -200,8 +200,7 @@ function getPlace(squares, turn, difficulty) {
     }
 
     var win = [], draw = [];
-    /*if (turn === 3)
-        console.log(squares);*/
+
     let done = 0;
     for (let i = 0; i < 9; i++) {
         if (!squares[i]) {
