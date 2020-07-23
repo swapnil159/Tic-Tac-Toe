@@ -256,11 +256,18 @@ function getPlace(squares, turn, difficulty) {
             if (turn === 3 || turn === 5 || turn === 7) {
                 return null;
             }
+
+            var any_move = [];
+
             for (let i = 0; i < 9; i++) {
                 if (!squares[i]) {
-                    return i;
+                    any_move.push(i);
                 }
             }
+
+            let len = any_move.length;
+            let pos = Math.floor(Math.random() * len);
+            return any_move[pos];
         }
         else {
             if(turn % 2 === 1) {
